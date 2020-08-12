@@ -45,9 +45,10 @@ const FeachData = () => {
         let filterIsValid;
         let filterCarName = cars.filter(car => {
             filterIsValid = true;
-            
             for (let index = 0; index < keyWords.length; index++) {
-              
+                // item = ['key', 'value']
+                // car[item[0]] === car.name
+                // item[1] === value
                 item = keyWords[index];
                 if(filterIsValid && item[1]) {
                     filterIsValid = car[item[0]] === item[1];
