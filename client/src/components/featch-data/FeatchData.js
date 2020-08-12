@@ -4,37 +4,69 @@ import axios from 'axios';
 import useLocalState from './LocalStorage'
 
 const FeachData = () => {
-    const [value, setValue] = useLocalState('');
+    const [localStorageCar, setLocalStorageCar] = useLocalState('cars');
+    const [inputFields, setInputFields] = useState({name: '', year: ''});
     const [cars, setCars] = useState([]);
     
     useEffect(() => {
         axios.get('/cars')
-            .then(res => {
+        .then(res => {
+            if(localStorageCar && localStorageCar.length) {
+                setCars(JSON.parse(localStorageCar));
+            }
+            else {
                 setCars(res.data);
-               
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }, []);
-
-    const handleOnChangeName = e => {
-        setValue(e.target.value);
+    
+    const changeInputHandler = e => {
+        const tempInputs = {...inputFields};
+        tempInputs[e.target.name] = e.target.value;
+        setInputFields(tempInputs);
     };
-   
- 
-    let filterCarName = cars.filter(car => {
-        if (car.name === value) {
-            return car
-        }
-    })
 
-    
-    
+    const searchCars = () => {
+        const entries = Object.entries(inputFields);
+        axios.get('/cars')
+        .then(res => {
+            filterCars(res.data, entries);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+
+    const filterCars = (cars, keyWords) => {
+        let item;
+        let filterIsValid;
+        let filterCarName = cars.filter(car => {
+            filterIsValid = true;
+            
+            for (let index = 0; index < keyWords.length; index++) {
+              
+                item = keyWords[index];
+                if(filterIsValid && item[1]) {
+                    filterIsValid = car[item[0]] === item[1];
+                };
+            };
+            return filterIsValid;
+        });
+        setLocalStorageCar(filterCarName);
+        setCars(filterCarName);
+    };
+ 
     return (
         <div>
-            <CarsTable cars={filterCarName}  onChange={handleOnChangeName}/>
+            <CarsTable
+                cars={cars}
+                changeInputHandler={changeInputHandler}
+                searchCars={searchCars}
+                inputFields={inputFields}
+            />
         </div>
     )
 }

@@ -34,8 +34,19 @@ const CarsTable = (props) => {
 
   return (
     <div>
-      <SearchIcon />
-      <Input type="text" placeholder="Enter car name" onChange={props.onChange} />
+      <SearchIcon onClick={props.searchCars}/>
+      <Input
+        type="text"
+        name='name'
+        placeholder="Enter car name"
+        onChange={props.changeInputHandler}
+      />
+      <Input
+        type="text"
+        name='year'
+        placeholder="Enter car year"
+        onChange={props.changeInputHandler}
+      />
       <TableContainer className={classes.tableContainer} aria-label="simple table" component={Paper}>
         <Table className={classes.table}>
           <TableHead>
