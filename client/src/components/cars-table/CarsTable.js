@@ -32,11 +32,10 @@ const useStyles = makeStyles({
 const CarsTable = (props) => {
   const classes = useStyles();
 
-  console.log(props.cars)
   return (
     <div>
-      <SearchIcon/>
-      <Input type="text" onChange={props.onChange} />
+      <SearchIcon />
+      <Input type="text" placeholder="Enter car name" onChange={props.onChange} />
       <TableContainer className={classes.tableContainer} aria-label="simple table" component={Paper}>
         <Table className={classes.table}>
           <TableHead>

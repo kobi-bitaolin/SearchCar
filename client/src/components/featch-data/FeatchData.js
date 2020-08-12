@@ -5,12 +5,13 @@ import useLocalState from './LocalStorage'
 
 const FeachData = () => {
     const [value, setValue] = useLocalState('');
-    const [cars, setCras] = useState([]);
-
+    const [cars, setCars] = useState([]);
+    
     useEffect(() => {
         axios.get('/cars')
             .then(res => {
-                setCras(res.data);
+                setCars(res.data);
+               
             })
             .catch(err => {
                 console.log(err);
@@ -18,20 +19,22 @@ const FeachData = () => {
 
     }, []);
 
-    const handelOnChange = e => {
+    const handleOnChangeName = e => {
         setValue(e.target.value);
     };
-
+   
  
     let filterCarName = cars.filter(car => {
         if (car.name === value) {
             return car
         }
     })
+
+    
     
     return (
         <div>
-            <CarsTable cars={filterCarName}  onChange={handelOnChange}  />
+            <CarsTable cars={filterCarName}  onChange={handleOnChangeName}/>
         </div>
     )
 }
