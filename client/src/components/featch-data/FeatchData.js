@@ -21,7 +21,7 @@ const FeachData = () => {
         .catch(err => {
             console.log(err);
         });
-    }, []);
+    }, [localStorageCar]);
     
     const changeInputHandler = e => {
         const tempInputs = {...inputFields};

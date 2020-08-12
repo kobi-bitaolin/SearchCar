@@ -18,7 +18,6 @@ const useStyles = makeStyles({
     width: 1000,
     margin: 'auto',
     padding: 10,
-    // border: "1px rgba(0,0,0,0.2) solid", 
     boxShadow: "0px 0px 8px rgb(0, 0, 0)",
     marginTop: 20
   },
