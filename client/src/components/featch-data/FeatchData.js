@@ -23,7 +23,7 @@ const FeachData = () => {
         .catch(err => {
             console.log(err);
         });
-    }, []);
+    },[]);
     
     const changeInputHandler = e => {
         const tempInputs = {...inputFields};
