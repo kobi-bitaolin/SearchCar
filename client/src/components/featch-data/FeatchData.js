@@ -8,7 +8,7 @@ const FeachData = () => {
     const [inputFields, setInputFields] = useState({name: '', year: ''});
     const [loading, setLoading] = useState(false);
     const [cars, setCars] = useState([]);
-    
+    // first get all cars array
     useEffect(() => {
         axios.get('/cars')
         .then(res => {
@@ -31,7 +31,7 @@ const FeachData = () => {
         console.log(tempInputs);
         setInputFields(tempInputs);
     };
-
+//get cars by input value
     const searchCars = () => {
         setLoading(!false)
         const entries = Object.entries(inputFields);
@@ -48,7 +48,7 @@ const FeachData = () => {
         setLoading(false)
         let item;
         let filterIsValid;
-        let filterCarName = cars.filter(car => {
+        let filterByCarNameAndYear = cars.filter(car => {
             filterIsValid = true;
             for (let index = 0; index < keyWords.length; index++) {
                 item = keyWords[index];
@@ -56,11 +56,11 @@ const FeachData = () => {
                     filterIsValid = car[item[0]] === item[1];
                 };
             };  
-    
+            
             return filterIsValid;
         });
-        setLocalStorageCar(filterCarName);
-        setCars(filterCarName);
+        setLocalStorageCar(filterByCarNameAndYear);
+        setCars(filterByCarNameAndYear);
     };
  
     return (
