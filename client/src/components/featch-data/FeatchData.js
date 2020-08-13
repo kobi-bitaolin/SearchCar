@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import CarsTable from '../cars-table/CarsTable';
+import useLocalState from './LocalStorage';
 import axios from 'axios';
-import useLocalState from './LocalStorage'
 
 const FeachData = () => {
     const [localStorageCar, setLocalStorageCar] = useLocalState('cars');
     const [inputFields, setInputFields] = useState({name: '', year: ''});
+    const [loading, setLoading] = useState(false);
     const [cars, setCars] = useState([]);
     
     useEffect(() => {
@@ -13,6 +14,7 @@ const FeachData = () => {
         .then(res => {
             if(localStorageCar && localStorageCar.length) {
                 setCars(JSON.parse(localStorageCar));
+               
             }
             else {
                 setCars(res.data);
@@ -21,15 +23,17 @@ const FeachData = () => {
         .catch(err => {
             console.log(err);
         });
-    }, [localStorageCar]);
+    }, []);
     
     const changeInputHandler = e => {
         const tempInputs = {...inputFields};
         tempInputs[e.target.name] = e.target.value;
+        console.log(tempInputs);
         setInputFields(tempInputs);
     };
 
     const searchCars = () => {
+        setLoading(!false)
         const entries = Object.entries(inputFields);
         axios.get('/cars')
         .then(res => {
@@ -41,6 +45,7 @@ const FeachData = () => {
     };
 
     const filterCars = (cars, keyWords) => {
+        setLoading(false)
         let item;
         let filterIsValid;
         let filterCarName = cars.filter(car => {
@@ -50,7 +55,8 @@ const FeachData = () => {
                 if(filterIsValid && item[1]) {
                     filterIsValid = car[item[0]] === item[1];
                 };
-            };
+            };  
+    
             return filterIsValid;
         });
         setLocalStorageCar(filterCarName);
@@ -64,7 +70,9 @@ const FeachData = () => {
                 changeInputHandler={changeInputHandler}
                 searchCars={searchCars}
                 inputFields={inputFields}
+                loading={loading}
             />
+          
         </div>
     )
 }

@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
+import SpinnerIcon from '../loader/SpinnerIcon';
 
 
 
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
 
 const CarsTable = (props) => {
   const classes = useStyles();
-
+  console.log(props.cars);
   return (
     <div>
       <SearchIcon onClick={props.searchCars} />
@@ -49,12 +50,16 @@ const CarsTable = (props) => {
         placeholder="Enter car year"
         onChange={props.changeInputHandler}
       />
-      {props.cars.length === 0 ? <div> 
-       <h1 style={{color: 'red'}}>car not found !</h1>
-       <p>Try another car/year ?</p>
-       </div>
+
+      {props.cars.length === 0 ?
+        <div>
+          <h1 style={{ color: 'red' }}>car not found !</h1>
+          <p>Try another car/year ?</p> 
+        </div>
         :
-        
+        props.loading === true ? 
+        <SpinnerIcon />
+        :      
         <TableContainer className={classes.tableContainer} aria-label="simple table" component={Paper}>
           <Table className={classes.table}>
             <TableHead>
@@ -78,7 +83,6 @@ const CarsTable = (props) => {
                   <TableCell align="right"> <img src={car.image} alt={car.name} /></TableCell>
                 </TableRow>
               ))}
-
             </TableBody>
           </Table>
         </TableContainer>
