@@ -3,12 +3,12 @@ import CarsTable from '../cars-table/CarsTable';
 import useLocalState from './LocalStorage';
 import axios from 'axios';
 
-const FeachData = () => {
+const CarsBord = () => {
     const [localStorageCar, setLocalStorageCar] = useLocalState('cars');
     const [inputFields, setInputFields] = useState({name: '', year: ''});
     const [loading, setLoading] = useState(false);
     const [cars, setCars] = useState([]);
-    // first get all cars array
+    
     useEffect(() => {
         axios.get('/cars')
         .then(res => {
@@ -31,7 +31,7 @@ const FeachData = () => {
         console.log(tempInputs);
         setInputFields(tempInputs);
     };
-//get cars by input value
+
     const searchCars = () => {
         setLoading(!false)
         const entries = Object.entries(inputFields);
@@ -71,9 +71,8 @@ const FeachData = () => {
                 searchCars={searchCars}
                 inputFields={inputFields}
                 loading={loading}
-            />
-          
+            />    
         </div>
     )
 }
-export default FeachData;
+export default CarsBord;

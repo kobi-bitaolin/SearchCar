@@ -1,12 +1,13 @@
-import React from 'react';
 import './App.css';
-import FeachData from './components/featch-data/FeatchData';
+import React from 'react';
+import CarsBord from './components/car-bord-data/CardBord';
 
 function App() {
   return (
     <div className="App">
         <h1>car-app</h1>
-        <FeachData />
+        <CarsBord />
+        
     </div>
   );
 }

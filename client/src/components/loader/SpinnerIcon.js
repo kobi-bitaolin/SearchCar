@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export default function SpinnerIcon() {
+const SpinnerIcon = () =>  {
     return (
         <svg className="spinner" xmlns="http://www.w3.org/2000/svg" 
         style={{background: "none"}} width="300px" height="300px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -56,3 +56,5 @@ export default function SpinnerIcon() {
         </svg>
     )
 }
+
+export default SpinnerIcon;
