@@ -1,0 +1,25 @@
+
+
+.svgLoader {
+    display: block;
+    margin: auto;
+  }
+
+  body{
+      font-family: 'Questrial', sans-serif;
+  }
+
+  .erorr-message {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+  }
+  
+  .erorr {
+    color: red;
+  }
+  
+  .cars-table{
+    margin-top: 10px;
+  }

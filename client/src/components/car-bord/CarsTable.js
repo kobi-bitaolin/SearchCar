@@ -2,18 +2,17 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import Table from '@material-ui/core/Table';
-import SpinnerIcon from '../loader/SpinnerIcon';
+import LoaderSvg from '../loader/LoaderSvg';
 import TableRow from '@material-ui/core/TableRow';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import { makeStyles } from '@material-ui/core/styles';
 import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
-
-
-
-
+import FormGroup from '@material-ui/core/FormGroup';
+import { Button } from '@material-ui/core';
+import './cars.css';
 
 const useStyles = makeStyles({
   tableContainer: {
@@ -21,49 +20,52 @@ const useStyles = makeStyles({
     margin: 'auto',
     padding: 10,
     boxShadow: "0px 0px 8px rgb(0, 0, 0)",
-    marginTop: 20
+    marginTop: 30
   },
   head: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: '#3f51b5;',
   },
   headText: {
     color: '#FAEBD7',
+  },
+  formGroup: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
   }
 });
 
-
-
 const CarsTable = (props) => {
 
+  const {searchCars, getInputValue, cars, loading} = props;
   const classes = useStyles();
-  console.log(props.cars);
   return (
-    <div>
-      <SearchIcon onClick={props.searchCars} />
+    <div className="cars-table">
+      <FormGroup className={classes.formGroup}>
       <Input
         type="text"
         name='name'
         placeholder="Enter car name"
-        onChange={props.changeInputHandler}
+        onChange={getInputValue}
       />
       <Input
         type="text"
         name='year'
         placeholder="Enter car year"
-        onChange={props.changeInputHandler}
-      />
-      
-
-      {props.cars.length === 0 ?
-      
-        <div>
-          <h1 style={{ color: 'red' }}>car not found !</h1>
+        onChange={getInputValue}
+      /> 
+      <Button onClick={searchCars} >Search</Button>
+      </FormGroup> 
+      {
+      cars.length === 0 ? 
+        <div className="erorr-message">
+          <h1 className="erorr" >car not found!</h1>
           <p>Try another car/year ?</p> 
         </div>
         :
-        props.loading === true ? 
-        <SpinnerIcon />
-        :      
+        loading ? 
+        <LoaderSvg />
+        :       
         <TableContainer className={classes.tableContainer} aria-label="simple table" component={Paper}>
           <Table className={classes.table}>
             <TableHead>
@@ -76,7 +78,7 @@ const CarsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.cars.map((car, id) => (
+              {cars.map((car, id) => (
                 <TableRow key={id}>
                   <TableCell component="th" scope="row">
                     {car.name}

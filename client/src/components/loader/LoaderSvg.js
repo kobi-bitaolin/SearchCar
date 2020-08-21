@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SpinnerIcon = () =>  {
+const LoaderSvg = () =>  {
     return (
-        <svg className="spinner" xmlns="http://www.w3.org/2000/svg" 
+        <svg className="svgLoader" xmlns="http://www.w3.org/2000/svg" 
         style={{background: "none"}} width="300px" height="300px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
             <g transform="rotate(0 50 50)">
                 <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#3bdf13">
@@ -56,5 +56,4 @@ const SpinnerIcon = () =>  {
         </svg>
     )
 }
-
-export default SpinnerIcon;
+export default LoaderSvg;
