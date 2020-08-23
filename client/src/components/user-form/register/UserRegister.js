@@ -1,38 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Register from './Register';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 
 const UserRegister = () => {
-    let inisialState = {
-        firstName: '',
+    const [registerForm, setRegisterForm] = useState({
+        username: '',
         lastName: '',
         email: '',
-        password: '',
-        confirmPassword: ''
-    }
-    const [registerForm, setRegisterForm] = useState(inisialState);
-    const [flag, setFlag] = useState(false)
+        password: ''
+    });
 
     const createUserHandler = () => {
-        let userData = {...registerForm}
+        const registerData = { ...registerForm }
         axios.post('/users/signup', {
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.email,
-            password: userData.password,
-            confirmPassword: userData.confirmPassword
+            username: registerData.username,
+            lastName: registerData.lastName,
+            email: registerData.email,
+            password: registerData.password
         })
-        .then(res => {
-            console.log(res);
-            setFlag(true); 
-            if(res.status === 201 && flag){
-                return <Redirect to="/cars" />
-            }
-        })
-        .catch(err => {
-            console.log('Erorr Occured!!',err);
-        })
+            .then(res => console.log(res.data))
     };
 
     const getInputValue = e => {
@@ -41,7 +28,7 @@ const UserRegister = () => {
         setRegisterForm(Inputs)
 
     };
-    console.log( 'register',registerForm);
+    console.log('register', registerForm);
     return (
         <div>
             <Register

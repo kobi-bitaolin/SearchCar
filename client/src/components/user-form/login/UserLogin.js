@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import Login from './LogIn';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+
+
 
 
 const UserLogin = () => {
-    // const [flag, setFlag] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [login, setLogin] = useState({ email: '', password: '' });
+    const [login, setLogin] = useState({ username: '', password: '' });
+    // const [isLog, setIslog]= useState(false)
 
     const isUserExsiet = () => {
-        setIsAuthenticated(true)
-        let userData = {...login}
-        axios.post('/users/singup', {
-            email: userData.email,
-            password: userData.password
+        const logInData = { ...login }
+        axios.post('/users/login', {
+            username: logInData.username,
+            password: logInData.password
+
         })
-        .then(res => {
-            console.log(res);
-            setIsAuthenticated(true); 
-            if(res.status === 201 && isAuthenticated){
-                return <Redirect to="/carsbord" />
-            }
-        })
-        .catch(err => {
-            console.log('Erorr Occured!!',err);
-        })
+            .then(res => {
+                let data = res.data;
+                console.log(data.isAuthenticated);
+                if (data.isAuthenticated) {
+                    console.log(res.data); 
+                    console.log('go to /carsbord'); 
+                }
+            })
+
+
     };
 
     const getInputValue = e => {
@@ -38,12 +38,14 @@ const UserLogin = () => {
 
     console.log("login", login);
     return (
-        <div>
-            <Login
-                handleLogin={isUserExsiet}
-                handleInput={getInputValue}
-            />
-        </div>
+     
+            <div>
+                <Login
+                    handleLogin={isUserExsiet}
+                    handleInput={getInputValue}
+                />
+            </div>
+   
     )
 }
 

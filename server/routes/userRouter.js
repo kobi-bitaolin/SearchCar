@@ -1,56 +1,79 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-// const passportConfig = require('../auth/auth');
+const passportConfig = require('../auth/passport');
 const JWT = require('jsonwebtoken');
 const User = require('../modules/userModule');
 
-router.post('/signup', (req, res) => {
-    const { firstName, lastName, email, password, confirmPassword } = req.body;
-    User.findOne({ email }, (err, user) => {
-        if (err)
-            return res.status(500).json({
-                message: 'Erorr As Occured!'
-            })
-        if (user)
-            return res.status(400).json({
-                message: 'Username already taken!'
-            })
-        else {
-            const newUser = new User({ firstName, lastName, email, password, confirmPassword });
-            newUser.save(err => {
-                if (err)
-                    return res.status(500).json({
-                        message: 'Erorr As Occured!'
-                    })
-                else
-                    return res.status(201).json({
-                        message: 'Account successfully created!'
-                    })
-            })
-        }
-    })
-});
-
 const signToken = userID => {
     return JWT.sign({
-        iss: "Coder",
+        iss: "Code",
         sub: userID
-    }, "Coder", { expiresIn: "1h" });
+    }, "Code", { expiresIn: "1h" });
 }
 
-router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
+router.post('/signup', (req, res) => {
+    const { username, lastName, email, password } = req.body;
+    User.findOne({ username }, (err, user) => {
+        if (err)
+            res.status(500).json({
+                message: { Body: "Error has occured", Error: true }
+            });
+        if (user)
+            res.status(400).json({
+                message: { Body: "Username is already taken", Error: true }
+            });
+        else {
+            const newUser = new User({ username, lastName, email, password });
+            newUser.save(err => {
+                if (err)
+                    res.status(500).json({
+                        message: { Body: "Error has occured", Error: true }
+                    });
+                else
+                    res.status(201).json({
+                        message: {
+                            Body: "Account successfully created",
+                            user: username,
+                            Error: false
+                        }
+                    });
+            });
+        }
+    });
+});
 
+
+
+router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
     if (req.isAuthenticated()) {
-        const { _id, email } = req.user;
+        const { _id, username } = req.user;
         const token = signToken(_id)
-        res.cookie('access_token', token, { httpOnly: true, sameSite: true });
+        res.cookie("access_token", token, { httpOnly: true, sameSite: true });
         res.status(200).json({
             isAuthenticated: true,
-            user: { email }
+            user: { username }
         })
     }
-})
+});
+
+
+
+router.get('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.clearCookie("access_token");
+    res.json({ user: { username: "" }, success: true })
+});
+
+
+router.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { username } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { username } });
+});
+
+
+
+
+
 
 module.exports = router;
 

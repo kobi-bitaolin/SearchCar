@@ -3,11 +3,10 @@ const bcrypt = require('bcryptjs');
 
 // User Schema
 const UserSchema = new mongoose.Schema({
-    firstName: { type: String },
+    username: { type: String, required: true, unique: true },
     lastName: { type: String },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    confirmPassword: { type: String, required: true }
+    password: { type: String, required: true }
 });
 
 UserSchema.pre('save', function (next) {
@@ -29,7 +28,7 @@ UserSchema.methods.comparePassword = function (password, cb) {
         else {
             if (!isMatch)
                 return cb(null, isMatch);
-            return cb(null, this)
+            return cb(null, this);
         }
     })
 }

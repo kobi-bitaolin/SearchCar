@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
-import { Link } from 'react-router-dom';
-import { FormControl, InputLabel, Input, FormHelperText, Button, FormGroup } from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import { FormControl, InputLabel, Input, Button, FormGroup } from '@material-ui/core';
 
 
 const LogIn = (props) => {
@@ -13,13 +13,12 @@ const LogIn = (props) => {
                     <Link className="register-link" to="/register">register</Link>
                     <h2>Login</h2>
                     <FormControl className="form-control">
-                        <InputLabel htmlFor="my-input">Email address</InputLabel>
+                        <InputLabel htmlFor="my-input">User name</InputLabel>
                         <Input
-                            name="email"
-                            type="email"
+                            name="username"
+                            type="text"
                             onChange={handleInput}
                         />
-                        <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
                     </FormControl>
                     <FormControl className="form-control">
                         <InputLabel htmlFor="my-input">Password</InputLabel>

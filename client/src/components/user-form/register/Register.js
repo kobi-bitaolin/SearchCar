@@ -12,9 +12,9 @@ const Register = (props) => {
                 <FormGroup className="form-register">
                     <h2>Register</h2>
                     <FormControl className="form-control-register">
-                        <InputLabel htmlFor="my-input">First Name</InputLabel>
+                        <InputLabel htmlFor="my-input">User Name</InputLabel>
                         <Input
-                            name='firstName'
+                            name="username"
                             type="text"
                             onChange={handleOnChange}
                         />
@@ -22,7 +22,7 @@ const Register = (props) => {
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Last Name</InputLabel>
                         <Input
-                            name='lastName'
+                            name="lastName"
                             type="text"
                             onChange={handleOnChange}
                         />
@@ -30,7 +30,7 @@ const Register = (props) => {
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Email address</InputLabel>
                         <Input
-                            name='email'
+                            name="email"
                             type="email"
                             onChange={handleOnChange}
                         />
@@ -39,20 +39,12 @@ const Register = (props) => {
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Password</InputLabel>
                         <Input
-                            name='passwword'
+                            name="passwword"
                             type="password"
                             onChange={handleOnChange}
                         />
                     </FormControl>
-                    <FormControl className="form-control-register">
-                        <InputLabel htmlFor="my-input"> Confirm Password</InputLabel>
-                        <Input
-                            name='confimPassword'
-                            type="password"
-                            onChange={handleOnChange}
-                        />
-                    </FormControl>
-                    <Button onClick={handleSubmit} type='submit' className="btn" variant="contained" color="primary" >
+                    <Button onClick={handleSubmit} className="btn" variant="contained" color="primary" >
                         submit
                  </Button>
                 </FormGroup>
