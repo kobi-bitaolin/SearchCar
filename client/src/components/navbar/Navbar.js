@@ -1,11 +1,13 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { IsUserLogContext } from '../context/user';
+import { Redirect } from 'react-router'
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import './nav.css';
 
 const Navbar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -17,21 +19,28 @@ const Navbar = () => {
     },
   }));
   const classes = useStyles();
+  const { isLog } = useContext(IsUserLogContext);
+  console.log(isLog);
 
-  // const LogOut = () => {
-  //   axios.get('/users/logout')
-  //     .then(res => console.log(res.data))
-  // }
-
+  const logOut = () => {
+    axios.get('/logout')
+      .then(res => {
+        console.log(res.data);
+       return <Redirect to="/"/>
+      })
+  }
   return (
     <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">
-             <a href="/carsbord">car bord</a> <a href="/">Logout</a>
-                </Typography>
-          </Toolbar>
-        </AppBar>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Typography className="nav-container" variant="h6" color="inherit">
+            {
+              isLog ? <a className="nav-link" onClick={logOut} href='/'>Logout</a> : <a href="/register" className="nav-link" >Register</a>
+            }
+            <span className="cars-bord">cars-bord</span> 
+          </Typography>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

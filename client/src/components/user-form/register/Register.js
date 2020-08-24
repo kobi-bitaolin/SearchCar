@@ -39,7 +39,7 @@ const Register = (props) => {
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Password</InputLabel>
                         <Input
-                            name="passwword"
+                            name="password"
                             type="password"
                             onChange={handleOnChange}
                         />

@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../../client/src/components/app/App';
+import {IsUserLogProvider} from './components/context/user';
 
 ReactDOM.render(
   <React.StrictMode>
+    <IsUserLogProvider>
     <App />
+    </IsUserLogProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

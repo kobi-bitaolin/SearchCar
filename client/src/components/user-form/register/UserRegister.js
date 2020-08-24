@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Register from './Register';
-// import { Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 
 const UserRegister = () => {
     const [registerForm, setRegisterForm] = useState({
@@ -10,7 +10,7 @@ const UserRegister = () => {
         email: '',
         password: ''
     });
-
+    const history = useHistory();
     const createUserHandler = () => {
         const registerData = { ...registerForm }
         axios.post('/users/signup', {
@@ -19,7 +19,13 @@ const UserRegister = () => {
             email: registerData.email,
             password: registerData.password
         })
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data);
+                history.push('/')
+            })
+            .catch(err => console.log(err))
+            
+            
     };
 
     const getInputValue = e => {
