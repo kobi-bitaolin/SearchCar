@@ -1,11 +1,10 @@
 import './App.css'
 import React from 'react';
-import UserLogIn from '../user-form/login/UserLogin';
 import Navbar from '../navbar/Navbar';
-import UserRegister from '../user-form/register/UserRegister';
 import CarsBord from '../car-bord/CarsBord';
+import UserLogIn from '../user-log-form/login/UserLogin';
+import UserRegister from '../user-log-form/register/UserRegister';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 
 const App = () => {
   return (

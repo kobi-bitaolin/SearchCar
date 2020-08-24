@@ -13,9 +13,9 @@ const signToken = userID => {
 }
 
 router.post('/signup', (req, res) => {
-    const { username, lastName, email, password } = req.body;
+    const { username, lastName, email, password, authMethod } = req.body;
     User.findOne({ username }, (err, user) => {
-        console.log('Sign up user:',user);
+        console.log('Sign up user:', user);
         if (err)
             res.status(500).json({
                 message: { Body: "Error has occured Inside find", Error: true }
@@ -25,7 +25,7 @@ router.post('/signup', (req, res) => {
                 message: { Body: "Username is already taken ", Error: true }
             });
         else {
-            const newUser = new User({ username, lastName, email, password });
+            const newUser = new User({ username, lastName, email, password, authMethod });
             newUser.save(err => {
                 if (err)
                     res.status(500).json({
@@ -33,7 +33,7 @@ router.post('/signup', (req, res) => {
                     });
                 else
                     res.status(201).send({
-                        username, lastName, email
+                        username, lastName, email, authMethod
                     });
             });
         }
@@ -60,6 +60,31 @@ router.get('/logout', passport.authenticate('jwt', { session: false }), (req, re
     res.clearCookie("access_token");
     res.json({ user: { username: "" }, success: true })
 });
+
+
+router.post('/facebook/login', (req, res) => {
+    const { facebookUserID, username, email } = req.body;
+    console.log(req.body);
+    User.findOne({ facebookUserID }).then(user => {
+        if (user)
+            return res.status(200).send(user);
+        else {
+            const newUser = new User({ facebookUserID, username, email });
+            newUser.save(err => {
+                console.log('Erorr', err);
+                if (err) {
+                    res.status(500).json({
+                        message: { Body: "Error has occured Create user", Error: true }
+                    });
+                }
+                else
+                    res.status(201).send({
+                        username, facebookUserID, email
+                    });
+            });
+        }
+    })
+})
 
 
 // router.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {

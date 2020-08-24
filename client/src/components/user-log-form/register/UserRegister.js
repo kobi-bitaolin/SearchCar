@@ -17,15 +17,14 @@ const UserRegister = () => {
             username: registerData.username,
             lastName: registerData.lastName,
             email: registerData.email,
-            password: registerData.password
+            password: registerData.password,
+            authMethod: "jwt"
         })
-            .then(res => {
-                console.log(res.data);
+            .then(() => {
                 history.push('/')
             })
-            .catch(err => console.log(err))
-            
-            
+            .catch(err => console.log(err));
+                   
     };
 
     const getInputValue = e => {
@@ -34,7 +33,7 @@ const UserRegister = () => {
         setRegisterForm(Inputs)
 
     };
-    console.log('register', registerForm);
+   
     return (
         <div>
             <Register

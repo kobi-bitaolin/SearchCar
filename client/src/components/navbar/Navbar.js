@@ -23,9 +23,9 @@ const Navbar = () => {
   console.log(isLog);
 
   const logOut = () => {
-    axios.get('/logout')
-      .then(res => {
-        console.log(res.data);
+    axios.get('users/logout')
+      .then(() => {
+        localStorage.clear();
        return <Redirect to="/"/>
       })
   }

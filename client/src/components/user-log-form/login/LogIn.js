@@ -1,12 +1,14 @@
 import React from 'react';
 import './login.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import FaceBookLog from '../facebook/FaceBookLog';
 import { FormControl, InputLabel, Input, Button, FormGroup } from '@material-ui/core';
 
 
 const LogIn = (props) => {
     const { handleInput, handleLogin } = props;
     return (
+
         <div className="login-page">
             <div className="contaner">
                 <FormGroup className="form">
@@ -32,8 +34,10 @@ const LogIn = (props) => {
                         submit
                     </Button>
                 </FormGroup>
+                <FaceBookLog />
             </div>
         </div>
+
     )
 }
 export default LogIn;
