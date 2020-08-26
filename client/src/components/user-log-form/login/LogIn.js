@@ -19,6 +19,7 @@ const LogIn = ({ handleInput, handleLogin }) => {
                                 type="text"
                                 onChange={handleInput}
                             />
+                           
                         </FormControl>
                         <FormControl className="form-control">
                             <InputLabel htmlFor="my-input">Password</InputLabel>
@@ -27,6 +28,7 @@ const LogIn = ({ handleInput, handleLogin }) => {
                                 type="password"
                                 onChange={handleInput}
                             />
+                           
                         </FormControl>
                         <Button onClick={handleLogin} className="btn" variant="contained" color="primary" >
                             submit

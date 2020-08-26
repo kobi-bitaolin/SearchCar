@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { IsUserLogContext } from '../context/user';
 import { Redirect } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 import './nav.css';
 
 const Navbar = () => {
@@ -23,9 +23,14 @@ const Navbar = () => {
   console.log(isLog);
 
   const logOut = () => {
-        localStorage.clear();
+    axios.get('/users/logout')
+      .then(res =>{
+        console.log(res.data);
+         localStorage.clear();
         setIsLog(true);
-        return <Redirect to="/" />  
+        return <Redirect to="/" /> 
+      })
+        
   }
   return (
     <div className={classes.root}>

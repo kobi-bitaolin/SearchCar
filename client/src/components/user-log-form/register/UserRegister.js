@@ -8,8 +8,13 @@ const UserRegister = () => {
         username: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        usernameErorr:'asfsfddfshfsdh',
+        lastNameErorr:'',
+        emailErorr:'',
+        passwordErorr:''
     });
+
     const history = useHistory();
     const createUserHandler = () => {
         const registerData = { ...registerForm }
@@ -21,7 +26,7 @@ const UserRegister = () => {
             authMethod: "jwt"
         })
             .then(() => {
-                history.push('/')
+                history.push('/');
             })
             .catch(err => console.log(err));
                    
@@ -31,8 +36,10 @@ const UserRegister = () => {
         const Inputs = { ...registerForm };
         Inputs[e.target.name] = e.target.value;
         setRegisterForm(Inputs)
-
     };
+
+
+  
    
     return (
         <div>

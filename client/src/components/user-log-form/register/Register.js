@@ -10,7 +10,7 @@ const Register = ({ handleOnChange, handleSubmit }) => {
                     <h2>Register</h2>
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">User Name</InputLabel>
-                        <Input
+                        <Input className="register-input"
                             name="username"
                             type="text"
                             onChange={handleOnChange}
@@ -18,28 +18,31 @@ const Register = ({ handleOnChange, handleSubmit }) => {
                     </FormControl>
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Last Name</InputLabel>
-                        <Input
+                        <Input className="register-input"
                             name="lastName"
                             type="text"
                             onChange={handleOnChange}
                         />
+                      
                     </FormControl>
                     <FormControl className="form-control-register">
-                        <InputLabel htmlFor="my-input">Email address</InputLabel>
-                        <Input
+                        <InputLabel htmlFor="my-input">Email Address</InputLabel>
+                        <Input className="register-input"
                             name="email"
                             type="email"
                             onChange={handleOnChange}
                         />
+                     
                         <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
                     </FormControl>
                     <FormControl className="form-control-register">
                         <InputLabel htmlFor="my-input">Password</InputLabel>
-                        <Input
+                        <Input className="register-input"
                             name="password"
                             type="password"
                             onChange={handleOnChange}
                         />
+                      
                     </FormControl>
                     <Button onClick={handleSubmit} className="btn" variant="contained" color="primary" >
                         submit

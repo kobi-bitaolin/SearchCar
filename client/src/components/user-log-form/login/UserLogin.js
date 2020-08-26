@@ -16,7 +16,8 @@ const UserLogin = () => {
             password: logInData.password
 
         })
-          .then(() => {
+          .then((res) => {
+            localStorage.setItem('login',JSON.stringify({...res.data }));
                 history.push('/carsbord');
                 setIsLog(true);
             })  
