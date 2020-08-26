@@ -2,10 +2,7 @@ import React from 'react';
 import './register.css';
 import { FormControl, InputLabel, Input, FormHelperText, Button, FormGroup } from '@material-ui/core';
 
-
-const Register = (props) => {
-    const { handleOnChange, handleSubmit } = props;
-
+const Register = ({ handleOnChange, handleSubmit }) => {
     return (
         <div className="register-page">
             <div className="contaner-register">

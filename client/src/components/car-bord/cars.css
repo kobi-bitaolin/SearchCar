@@ -23,3 +23,14 @@
   .cars-table{
     margin-top: 10px;
   }
+
+
+@media (max-width: 500px){
+  #table thead {
+    display:none;
+  }
+
+  #table td {
+    display: block;
+  }
+}

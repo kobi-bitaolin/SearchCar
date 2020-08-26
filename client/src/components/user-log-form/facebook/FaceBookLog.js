@@ -1,8 +1,8 @@
-import React, { useState,useContext } from 'react';
+import React, { useContext } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
-import  {useHistory} from 'react-router-dom';
-import {IsUserLogContext} from '../../context/user';
+import { useHistory } from 'react-router-dom';
+import { IsUserLogContext } from '../../context/user';
 
 const FaceBookLog = () => {
     const {setIsLog} = useContext(IsUserLogContext);
@@ -18,7 +18,6 @@ const FaceBookLog = () => {
             authMethod: "facebook" 
         })
             .then(res => {
-                console.log(res.data);
                 localStorage.setItem('login',JSON.stringify({...res.data,accessToken }));
                 setIsLog(true);
                 history.push('/carsbord');
@@ -34,7 +33,7 @@ const FaceBookLog = () => {
     )
 
     return (
-        <div className="facebook-login">
+        <div>
             {fbContent}
         </div>
     )

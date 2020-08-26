@@ -1,24 +1,25 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Login from './LogIn';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-import {IsUserLogContext} from '../../context/user';
+import { IsUserLogContext } from '../../context/user';
 
 const UserLogin = () => {
-    const [login, setLogin] = useState({ username: '', password: '' })
+    const [login, setLogin] = useState({ email: '', password: '' })
     const history = useHistory();
-    const {setIsLog} = useContext(IsUserLogContext);
+    const { setIsLog } = useContext(IsUserLogContext);
+
     const isUserExsiet = () => {
         const logInData = { ...login }
         axios.post('/users/login', {
-            username: logInData.username,
+            email: logInData.email,
             password: logInData.password
 
         })
-            .then(() => {
-                    history.push('/carsbord'); 
-                    setIsLog(true);    
-            })
+          .then(() => {
+                history.push('/carsbord');
+                setIsLog(true);
+            })  
 
 
     };
@@ -30,14 +31,13 @@ const UserLogin = () => {
     };
 
     return (
-     
-            <div>
-                <Login
-                    handleLogin={isUserExsiet}
-                    handleInput={getInputValue}
-                />
-            </div>
-   
+
+        <div>
+            <Login
+                handleLogin={isUserExsiet}
+                handleInput={getInputValue}
+            />
+        </div>
     )
 }
 

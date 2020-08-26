@@ -14,7 +14,7 @@ const signToken = userID => {
 
 router.post('/signup', (req, res) => {
     const { username, lastName, email, password, authMethod } = req.body;
-    User.findOne({ username }, (err, user) => {
+    User.findOne({ email }, (err, user) => {
         console.log('Sign up user:', user);
         if (err)
             res.status(500).json({
@@ -44,22 +44,16 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
     if (req.isAuthenticated()) {
-        const { _id, username } = req.user;
+        const { _id, email } = req.user;
         const token = signToken(_id)
         res.cookie("access_token", token, { httpOnly: true, sameSite: true });
         res.status(200).json({
             isAuthenticated: true,
-            user: { username }
+            user: { email }
         })
     }
 });
 
-
-
-router.get('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.clearCookie("access_token");
-    res.json({ user: { username: "" }, success: true })
-});
 
 
 router.post('/facebook/login', (req, res) => {
@@ -84,18 +78,17 @@ router.post('/facebook/login', (req, res) => {
             });
         }
     })
-})
+});
 
+router.get('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.clearCookie("access_token");
+    res.json({ user: { username: "" }, success: true });
+});
 
 // router.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
 //     const { username } = req.user;
 //     res.status(200).json({ isAuthenticated: true, user: { username } });
 // });
-
-
-
-
-
 
 module.exports = router;
 

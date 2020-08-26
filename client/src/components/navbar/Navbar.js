@@ -5,8 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { IsUserLogContext } from '../context/user';
-import { Redirect } from 'react-router'
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+// import axios from 'axios';
 import './nav.css';
 
 const Navbar = () => {
@@ -19,15 +19,13 @@ const Navbar = () => {
     },
   }));
   const classes = useStyles();
-  const { isLog } = useContext(IsUserLogContext);
+  const { isLog, setIsLog } = useContext(IsUserLogContext);
   console.log(isLog);
 
   const logOut = () => {
-    axios.get('users/logout')
-      .then(() => {
         localStorage.clear();
-       return <Redirect to="/"/>
-      })
+        setIsLog(true);
+        return <Redirect to="/" />  
   }
   return (
     <div className={classes.root}>
@@ -35,9 +33,10 @@ const Navbar = () => {
         <Toolbar variant="dense">
           <Typography className="nav-container" variant="h6" color="inherit">
             {
-              isLog ? <a className="nav-link" onClick={logOut} href='/'>Logout</a> : <a href="/register" className="nav-link" >Register</a>
+              isLog ? <a className="nav-link" onClick={logOut} href="/">Logout</a> :
+                <a href="/register" className="nav-link" >Register</a>
             }
-            <span className="cars-bord">cars-bord</span> 
+            <span className="cars-bord">cars-bord</span>
           </Typography>
         </Toolbar>
       </AppBar>

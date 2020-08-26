@@ -1,40 +1,38 @@
 import React from 'react';
 import './login.css';
-import { Link } from 'react-router-dom';
 import FaceBookLog from '../facebook/FaceBookLog';
 import { FormControl, InputLabel, Input, Button, FormGroup } from '@material-ui/core';
 
 
-const LogIn = (props) => {
-    const { handleInput, handleLogin } = props;
+const LogIn = ({ handleInput, handleLogin }) => {
     return (
-
-        <div className="login-page">
-            <div className="contaner">
-                <FormGroup className="form">
-                    <Link className="register-link" to="/register">register</Link>
-                    <h2>Login</h2>
-                    <FormControl className="form-control">
-                        <InputLabel htmlFor="my-input">User name</InputLabel>
-                        <Input
-                            name="username"
-                            type="text"
-                            onChange={handleInput}
-                        />
-                    </FormControl>
-                    <FormControl className="form-control">
-                        <InputLabel htmlFor="my-input">Password</InputLabel>
-                        <Input
-                            name="password"
-                            type="password"
-                            onChange={handleInput}
-                        />
-                    </FormControl>
-                    <Button onClick={handleLogin} className="btn" variant="contained" color="primary" >
-                        submit
+        <div>
+            <div className="login-page">
+                <div className="contaner">
+                    <FormGroup className="form">
+                        <div className="fb"><FaceBookLog /></div>
+                        <h2>Login</h2>
+                        <FormControl className="form-control">
+                            <InputLabel htmlFor="my-input">Email</InputLabel>
+                            <Input
+                                name="email"
+                                type="text"
+                                onChange={handleInput}
+                            />
+                        </FormControl>
+                        <FormControl className="form-control">
+                            <InputLabel htmlFor="my-input">Password</InputLabel>
+                            <Input
+                                name="password"
+                                type="password"
+                                onChange={handleInput}
+                            />
+                        </FormControl>
+                        <Button onClick={handleLogin} className="btn" variant="contained" color="primary" >
+                            submit
                     </Button>
-                </FormGroup>
-                <FaceBookLog />
+                    </FormGroup>
+                </div>
             </div>
         </div>
 
