@@ -25,6 +25,12 @@ body {
     padding: 40px 90px;
 }
 
+@media (max-width: 500px){
+    .contaner-register {
+      box-shadow: none;
+    }
+  }
+
 
 
 
