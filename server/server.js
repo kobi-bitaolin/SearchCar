@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const carApi = require("./carapi.json");
 const path = require('path');
 dotenv.config();
-const db = 'mongodb+srv://' + process.env.MONGO_ATLAS + '@cluster0.pwfuj.mongodb.net/<dbname>?retryWrites=true&w=majority';
+const db = process.env.MONGO_DB_URI;
 
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection
@@ -26,10 +26,14 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static('client/build'));
 
-    app.get('*', (req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    const root = path.join(__dirname, "..", 'client', 'build')
+
+    app.use(express.static(root));
+
+    app.get("*", (req, res) => {
+
+      res.sendFile('index.html', { root });
     })
 }
 

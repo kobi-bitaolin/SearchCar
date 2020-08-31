@@ -1,0 +1,23 @@
+{
+  "name": "searchcar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm install && node server.js",
+    "client-install": "cd client && npm install",
+    "react-build": "cd client && npm run build",
+    "heroku-postbuild": "npm run client-install && npm run react-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kobi-bitaolin/SearchCar.git"
+  },
+  "author": "\"kobi-bitaolin\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kobi-bitaolin/SearchCar/issues"
+  },
+  "homepage": "https://github.com/kobi-bitaolin/SearchCar#readme"
+}
