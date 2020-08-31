@@ -26,6 +26,8 @@ const FaceBookLog = () => {
 
     let fbContent = (
         <FacebookLogin
+            isMobile={true}
+            disableMobileRedirect={true}
             appId="317858369537395"
             fields="name,email"
             autoLoad={false}
