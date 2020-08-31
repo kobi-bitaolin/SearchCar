@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CarsTable from './CarsTable';
-import useLocalState from './LocalStorage';
+// import useLocalState from './LocalStorage';
 import axios from 'axios';
 
 const CarsBord = () => {
-    const [localStorageCar, setLocalStorageCar] = useLocalState('cars');
+    // const [localStorageCar, setLocalStorageCar] = useLocalState('cars');
     const [inputFields, setInputFields] = useState({ name: '', year: '' });
     const [loading, setLoading] = useState(false);
     const [cars, setCars] = useState([]);
@@ -12,13 +12,8 @@ const CarsBord = () => {
     useEffect(() => {
         axios.get('/cars')
             .then(res => {
-                if (localStorageCar && localStorageCar.length) {
-                    setCars(JSON.parse(localStorageCar));
-
-                }
-                else {
-                    setCars(res.data);
-                }
+              setCars(res.data);
+             
             })
             .catch(err => {
                 console.log(err);
@@ -50,7 +45,7 @@ const CarsBord = () => {
                 return car
             }
         });
-        setLocalStorageCar(filterByCarNameAndYear);
+        // setLocalStorageCar(filterByCarNameAndYear);
         setCars(filterByCarNameAndYear);
     };
 

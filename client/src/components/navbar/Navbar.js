@@ -23,15 +23,14 @@ const Navbar = () => {
   console.log(isLog);
 
   const logOut = () => {
+    localStorage.clear();
     axios.get('/users/logout')
-      .then(res =>{
-        console.log(res.data);
-         localStorage.clear();
+      .then(()=>{
         setIsLog(true);
         return <Redirect to="/" /> 
-      })
-        
+      })  
   }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
