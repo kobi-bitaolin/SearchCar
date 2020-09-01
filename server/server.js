@@ -25,14 +25,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// deploy to heroku
 if (process.env.NODE_ENV === "production") {
-
     const root = path.join(__dirname, "..", 'client', 'build')
-
     app.use(express.static(root));
-
     app.get("*", (req, res) => {
-
       res.sendFile('index.html', { root });
     })
 }
